@@ -10,10 +10,24 @@ class TweetWall extends React.Component {
   }
 
   // TODO: componentWillMount()
-
+  componentWillMount() {
+    this.state.tweets = this.props.newTweets
+  }
   // TODO: shouldComponentUpdate()
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return (nextProps.newTweets.length > 0)
+  }
+
   // TODO: componentWillReceiveProps()
+  componentWillReceiveProps(nextProps) {
+    let arr = this.state.tweets
+    nextProps.newTweets.forEach((tweet) => {arr.unshift(tweet)})
+    this.setState({
+      tweets: arr
+    })
+  }
+
 
   render() {
     const tweets = this.state.tweets.map((tweet, index) => {
