@@ -16,14 +16,29 @@ class App extends React.Component {
     this.fetchTweets = this.fetchTweets.bind(this);
   }
 
-  // TODO: componentWillMount() 
+  fetchTweets() {
+    const newTweets = getTweets();
+    this.setState({
+      latestTweets: newTweets
+    });
+  }
 
-  // TODO: componentDidMount() 
+  componentWillMount() {
+    this.fetchTweets()
+  }
 
-  // TODO: componentWillUnmount()
+  componentDidMount() {
+    this.startInterval()
+  }
 
-  // TODO: componentDidUpdate()
-  
+  componentWillUnmount() {
+    this.cleanUpInterval()
+  }
+
+  componentDidUpdate() {
+    this.updateChart(this.state.latestTweets.length)
+  }
+
   updateChart(numTweets) {
     update(numTweets);
   }
@@ -34,13 +49,6 @@ class App extends React.Component {
 
   cleanUpInterval() {
     clearInterval(this.interval);
-  }
-
-  fetchTweets() {
-    const newTweets = getTweets();
-    this.setState({
-      latestTweets: newTweets
-    });
   }
 
   render() {
