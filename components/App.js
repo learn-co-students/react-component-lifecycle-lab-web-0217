@@ -16,17 +16,33 @@ class App extends React.Component {
     this.fetchTweets = this.fetchTweets.bind(this);
   }
 
-  // TODO: componentWillMount() 
+  // TODO: componentWillMount()
 
-  // TODO: componentDidMount() 
+  componentWillMount(){
+    this.fetchTweets()
+  }
 
+  // TODO: componentDidMount()
+  componentDidMount(){
+    this.startInterval()
+  }
   // TODO: componentWillUnmount()
+  componentWillUnmount(){
+    this.cleanUpInterval()
+  }
 
   // TODO: componentDidUpdate()
-  
-  updateChart(numTweets) {
-    update(numTweets);
+  componentDidUpdate(prevProps, prevState){
+  if(prevState.latestTweets.length !== this.state.latestTweets.length){
+    let numTweets = this.state.latestTweets.length
+    this.updateChart(numTweets)
+    }
   }
+
+  updateChart(numTweets) {
+      update(numTweets);
+      }
+
 
   startInterval() {
     this.interval = setInterval(this.fetchTweets, 2000);
