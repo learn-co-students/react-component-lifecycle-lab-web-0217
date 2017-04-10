@@ -1,7 +1,7 @@
 import React from 'react';
 import TweetWall from './TweetWall';
 
-import { getTweets }from '../lib/mockAPI';
+import { getTweets } from '../lib/mockAPI';
 import { initialize, update } from '../lib/chart';
 
 export default class App extends React.Component {
@@ -16,13 +16,21 @@ export default class App extends React.Component {
     this.fetchTweets = this.fetchTweets.bind(this);
   }
 
-  // TODO: componentWillMount()
+  componentWillMount() {
+    this.fetchTweets();
+  }
 
-  // TODO: componentDidMount()
+  componentDidMount() {
+    this.startInterval();
+  }
 
-  // TODO: componentWillUnmount()
+  componentWillUnmount() {
+    this.cleanUpInterval();
+  }
 
-  // TODO: componentDidUpdate()
+  componentDidUpdate() {
+    this.updateChart(this.state.latestTweets.length);
+  }
 
   updateChart(numTweets) {
     update(numTweets);
