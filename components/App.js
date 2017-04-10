@@ -17,12 +17,24 @@ export default class App extends React.Component {
   }
 
   // TODO: componentWillMount()
+  componentWillMount() {
+    this.fetchTweets()
+  }
 
   // TODO: componentDidMount()
+  componentDidMount() {
+    this.startInterval()
+  }
 
-  // TODO: componentWillUnmount()
+  // TODO:
+  componentWillUnmount() {
+    this.cleanUpInterval()
+  }
 
-  // TODO: componentDidUpdate()
+  // TODO:
+  componentDidUpdate() {
+    this.updateChart(this.state.latestTweets.length)
+  }
 
   updateChart(numTweets) {
     update(numTweets);
